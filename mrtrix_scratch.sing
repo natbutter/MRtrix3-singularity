@@ -1,0 +1,41 @@
+Bootstrap: docker
+From: ubuntu:16.04
+
+%files
+
+%labels
+MAINTAINER nathaniel.butterworth@sydney.edu.au 
+MAINTAINER Sydney Informatics Hub
+
+%post
+mkdir /project /scratch
+apt-get update && apt-get install -y \
+bc \
+build-essential \
+dc \
+git \
+libopenblas-dev \
+nano \
+nodejs \
+npm \
+perl-modules \
+python \
+tar \
+tcsh \
+unzip \
+wget
+
+apt-get install -y git g++ python python-numpy libeigen3-dev zlib1g-dev libqt4-opengl-dev libgl1-mesa-dev libfftw3-dev libtiff5-dev
+
+git clone https://github.com/MRtrix3/mrtrix3.git
+cd mrtrix3
+./configure
+./build
+./set_path
+
+%environment
+export PATH=/mrtrix3/bin:$PATH
+
+
+%runscript
+exec /bin/bash "$@"

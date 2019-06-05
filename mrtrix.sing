@@ -1,0 +1,8 @@
+Bootstrap: docker
+From: bids/mrtrix3_connectome
+
+%post
+mkdir /project /scratch
+
+%runscript
+exec /bin/bash

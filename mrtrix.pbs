@@ -1,0 +1,18 @@
+#!/bin/bash -v
+#PBS -P test
+#PBS -l select=1:ncpus=1:mem=1GB
+#PBS -l walltime=0:01:00
+#PBS -q defaultQ
+
+#Change to the working directory you submitted the script
+$PBS_O_WORKDIR
+
+echo "start time"
+date
+echo
+
+#Load in the modules we need
+module load singularity 
+
+#Execute singularity with the mrtrix command we need from the container
+singularity exec mrtrix.img mrconvert
